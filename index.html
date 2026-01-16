@@ -6,16 +6,17 @@
     <title>balloon.oioioi 價格試算</title>
     <style>
         :root {
-            --primary-pink: #f8bbd0;
-            --dark-pink: #c48b9f;
-            --bg-soft: #fff9fb;
-            --accent: #d81b60;
+            /* 調整為清爽橘色系 */
+            --primary-orange: #ffe0b2; /* 淺杏橘 */
+            --dark-orange: #fb8c00;    /* 活潑亮橘 */
+            --bg-soft: #fffdfa;       /* 極淺暖底色 */
+            --accent: #e65100;        /* 深夕陽橘 */
         }
         body {
             font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-soft);
             margin: 0; padding: 15px; color: #444;
-            padding-bottom: 140px;
+            padding-bottom: 150px;
         }
         .container {
             max-width: 500px;
@@ -23,22 +24,22 @@
             background: white;
             padding: 20px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            box-shadow: 0 10px 30px rgba(251, 140, 0, 0.05);
         }
         h1 {
             text-align: center;
-            color: var(--dark-pink);
+            color: var(--dark-orange);
             font-size: 1.5rem;
             margin-bottom: 25px;
         }
         .category-title {
-            background: #fff0f3;
+            background: #fff3e0;
             padding: 10px 15px;
             border-radius: 12px;
-            color: #ad1457;
+            color: var(--accent);
             font-weight: bold;
             margin: 25px 0 12px 0;
-            border-left: 6px solid var(--primary-pink);
+            border-left: 6px solid var(--primary-orange);
             font-size: 1rem;
         }
         .item-row {
@@ -57,7 +58,7 @@
         }
         .shipping-row input[type="radio"] {
             margin-right: 12px;
-            accent-color: var(--accent);
+            accent-color: var(--dark-orange);
             width: 18px; height: 18px;
         }
         .item-info { flex-grow: 1; padding-right: 12px; }
@@ -72,9 +73,9 @@
             width: 32px;
             height: 32px;
             border-radius: 50%;
-            border: 1.5px solid var(--primary-pink);
+            border: 1.5px solid var(--primary-orange);
             background: white;
-            color: var(--dark-pink);
+            color: var(--dark-orange);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -82,7 +83,7 @@
             font-size: 1.3rem;
             user-select: none;
         }
-        .qty-btn:active { background: var(--primary-pink); color: white; transform: scale(0.9); }
+        .qty-btn:active { background: var(--primary-orange); color: white; transform: scale(0.9); }
         input[type="number"] {
             width: 35px;
             border: none;
@@ -119,7 +120,7 @@
         }
         .copy-btn {
             flex: 2.5;
-            background: var(--dark-pink);
+            background: var(--dark-orange);
             color: white;
             border: none;
             padding: 12px;
@@ -129,11 +130,11 @@
         }
         .reset-btn {
             flex: 1;
-            background: #f5f5f5;
+            background: #fdf5e6;
             border: none;
             padding: 12px;
             border-radius: 12px;
-            color: #999;
+            color: #b8860b;
             cursor: pointer;
         }
     </style>
@@ -290,21 +291,4 @@
     calculate();
 </script>
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
