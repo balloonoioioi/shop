@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>balloon.oioioi 價格試算</title>
+    <style>
+        :root {
+            --primary-pink: #f8bbd0;
+            --dark-pink: #c48b9f;
+            --bg-soft: #fff9fb;
+            --accent: #d81b60;
+        }
+        body {
+            font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+            background-color: var(--bg-soft);
+            margin: 0; padding: 15px; color: #444;
+            padding-bottom: 140px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        h1 {
+            text-align: center;
+            color: var(--dark-pink);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+        .category-title {
+            background: #fff0f3;
+            padding: 10px 15px;
+            border-radius: 12px;
+            color: #ad1457;
+            font-weight: bold;
+            margin: 25px 0 12px 0;
+            border-left: 6px solid var(--primary-pink);
+            font-size: 1rem;
+        }
+        .item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 5px;
+            border-bottom: 1px solid #fcfcfc;
+        }
+        .shipping-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 5px;
+            cursor: pointer;
+            border-bottom: 1px solid #fcfcfc;
+        }
+        .shipping-row input[type="radio"] {
+            margin-right: 12px;
+            accent-color: var(--accent);
+            width: 18px; height: 18px;
+        }
+        .item-info { flex-grow: 1; padding-right: 12px; }
+        .item-name { display: block; font-weight: 500; font-size: 0.95rem; line-height: 1.5; color: #333; }
+        .item-price { color: #888; font-size: 0.85rem; font-weight: bold; }
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .qty-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 1.5px solid var(--primary-pink);
+            background: white;
+            color: var(--dark-pink);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            user-select: none;
+        }
+        .qty-btn:active { background: var(--primary-pink); color: white; transform: scale(0.9); }
+        input[type="number"] {
+            width: 35px;
+            border: none;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--accent);
+            background: transparent;
+        }
+        .total-section {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px 25px 20px;
+            box-shadow: 0 -8px 25px rgba(0,0,0,0.05);
+            text-align: center;
+            z-index: 1000;
+            border-top: 1px solid #eee;
+        }
+        .total-amount { 
+            font-size: 2rem; 
+            color: var(--accent); 
+            font-weight: 800;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+            width: 100%;
+            max-width: 450px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .copy-btn {
+            flex: 2.5;
+            background: var(--dark-pink);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .reset-btn {
+            flex: 1;
+            background: #f5f5f5;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            color: #999;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎈 balloon.oioioi 價格試算</h1>
+    
+    <div id="calculator-content"></div>
+
+    <div class="category-title">🚚 配送服務 (請選擇一項)</div>
+    <label class="shipping-row">
+        <input type="radio" name="shipping" value="0" data-name="迴龍捷運站自取" checked onchange="calculate()">
+        <div class="item-info"><span class="item-name">迴龍捷運站自取</span><span class="item-price">$0</span></div>
+    </label>
+    <label class="shipping-row">
+        <input type="radio" name="shipping" value="100" data-name="大台北當日快捷" onchange="calculate()">
+        <div class="item-info"><span class="item-name">大台北(台北市/新北市/基隆市)地區 (郵局快捷當日)</span><span class="item-price">$100</span></div>
+    </label>
+    <label class="shipping-row">
+        <input type="radio" name="shipping" value="150" data-name="大台北以外快捷" onchange="calculate()">
+        <div class="item-info"><span class="item-name">大台北以外縣市 (郵局快捷當日/隔日)</span><span class="item-price">$150</span></div>
+    </label>
+    <label class="shipping-row">
+        <input type="radio" name="shipping" value="250" data-name="順豐/黑貓隔日" onchange="calculate()">
+        <div class="item-info"><span class="item-name">無快捷服務地區 (順豐/黑貓隔日早上到)</span><span class="item-price">$250</span></div>
+    </label>
+    <label class="shipping-row">
+        <input type="radio" name="shipping" value="350" data-name="代叫 Lala move 外送" onchange="calculate()">
+        <div class="item-info"><span class="item-name">我們幫忙叫 Lalamove 外送</span><span class="item-price">$350</span></div>
+    </label>
+    <label class="shipping-row">
+        <input type="radio" name="shipping" value="250" data-name="假日親送" onchange="calculate()">
+        <div class="item-info"><span class="item-name">假日開車親送</span><span class="item-price">$250</span></div>
+    </label>
+
+    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 40px; line-height: 1.6;">
+        * 金額僅供參考，實際金額依討論內容為主 *<br>
+        * 確認訂購請點擊下方複製內容並私訊截圖 *
+    </p>
+</div>
+
+<div class="total-section">
+    <div style="font-size: 0.85rem; color: #888;">含運費總金額</div>
+    <div class="total-amount">NT$ <span id="grand-total">0</span></div>
+    <div class="btn-group">
+        <button class="reset-btn" onclick="resetForm()">重設</button>
+        <button class="copy-btn" onclick="copyOrder()">複製訂單內容</button>
+    </div>
+</div>
+
+<script>
+    const data = [
+        { category: "🌸 可自行搭配花束氣球花品項 (各花型價格) 附提袋", items: [
+            { name: "長條捲捲", price: 80 }, { name: "圓形氣球", price: 100 },
+            { name: "愛心氣球", price: 100 }, { name: "尤加利葉", price: 120 },
+            { name: "鬱金香", price: 150 }, { name: "六瓣花", price: 150 },
+            { name: "五瓣花", price: 150 }, { name: "雙層五瓣花", price: 160 },
+            { name: "櫻花", price: 180 }, { name: "小玫瑰", price: 200 },
+            { name: "大圓形氣球花", price: 200 }, { name: "大玫瑰", price: 250 },
+            { name: "雙層果凍花", price: 250 },{ name: "透明果凍花", price: 250 }, { name: "小熊", price: 250 },
+            { name: "向日葵", price: 450 }, { name: "角色/公仔 (依難易度報價)", price: 500 },
+            { name: "山茶花", price: 470 }, { name: "中英文 客製化貼字", price: 100 },
+            { name: "蝴蝶結/圈圈/圓柱桶盆", price: 150 }
+        ]},
+        { category: "🧸 蛋糕訂購 (皆可加綁帶可戴在頭上)", items: [
+            { name: "小氣球蛋糕", price: 490 },
+            { name: "大氣球蛋糕", price: 580 }
+        ]},
+        { category: "🛍️ 單支氣球花包裝 (含葉子+提袋)", items: [
+            { name: "鬱金香/五瓣花/六瓣花", price: 250 },
+            { name: "鬱金香/五瓣花/六瓣花 (牛仔)", price: 290 },
+            { name: "櫻花", price: 270 }, { name: "小玫瑰", price: 280 },
+            { name: "小玫瑰 (牛仔)", price: 320 }, { name: "果凍花", price: 350 },
+            { name: "大玫瑰", price: 350 }, { name: "GD雛菊", price: 360 },
+            { name: "向日葵", price: 490 }, { name: "山茶花", price: 520 }
+        ]},
+        { category: "✨ 大型 / 巨型 / 捧花系列", items: [
+            { name: "大型玫瑰", price: 890 }, { name: "大型GD雛菊", price: 900 },
+            { name: "大型向日葵", price: 1090 }, { name: "巨型玫瑰", price: 1390 },
+            { name: "捧花（七朵五瓣花）", price: 1380 }
+        ]}
+    ];
+
+    const container = document.getElementById('calculator-content');
+    data.forEach(group => {
+        const catDiv = document.createElement('div');
+        catDiv.innerHTML = `<div class="category-title">${group.category}</div>`;
+        group.items.forEach(item => {
+            const row = document.createElement('div');
+            row.className = 'item-row';
+            row.innerHTML = `
+                <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">$${item.price}</span></div>
+                <div class="qty-control">
+                    <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
+                    <input type="number" class="qty-input" data-name="${item.name}" data-price="${item.price}" value="0" min="0" onchange="calculate()">
+                    <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
+                </div>
+            `;
+            catDiv.appendChild(row);
+        });
+        container.appendChild(catDiv);
+    });
+
+    function changeQty(btn, delta) {
+        const input = btn.parentElement.querySelector('input');
+        let val = parseInt(input.value) + delta;
+        if (val < 0) val = 0;
+        input.value = val;
+        calculate();
+    }
+
+    function calculate() {
+        let subtotal = 0;
+        document.querySelectorAll('.qty-input').forEach(input => {
+            subtotal += (parseInt(input.value) || 0) * parseInt(input.dataset.price);
+        });
+        let shipping = parseInt(document.querySelector('input[name="shipping"]:checked').value);
+        document.getElementById('grand-total').innerText = (subtotal + shipping).toLocaleString();
+    }
+
+    function resetForm() {
+        if(confirm("確定要重設所有選項嗎？")) {
+            document.querySelectorAll('.qty-input').forEach(input => input.value = 0);
+            document.querySelectorAll('input[name="shipping"]')[0].checked = true;
+            calculate();
+        }
+    }
+
+    function copyOrder() {
+        let text = "🎈 balloon.oioioi 訂單試算\n━━━━━━━━━━━━━━\n";
+        let hasItems = false;
+        document.querySelectorAll('.qty-input').forEach(input => {
+            if (parseInt(input.value) > 0) {
+                text += `▫️ ${input.dataset.name} x ${input.value}\n`;
+                hasItems = true;
+            }
+        });
+        
+        if (!hasItems) { alert("請先選擇品項喔！"); return; }
+
+        let shipElem = document.querySelector('input[name="shipping"]:checked');
+        text += `🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
+        text += `━━━━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
+        
+        navigator.clipboard.writeText(text).then(() => {
+            alert("訂單內容已複製成功！\n請直接貼上私訊給我們。");
+        });
+    }
+    calculate();
+</script>
+</body>
+</html>
