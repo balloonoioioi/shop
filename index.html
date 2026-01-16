@@ -141,7 +141,11 @@
     
     <div class="category-title">🎀 氣球花綁結方式 (必選一項)</div>
     <label class="selection-row">
-        <input type="radio" name="binding" value="150" data-name="蝴蝶結" checked onchange="calculate()">
+        <input type="radio" name="binding" value="0" data-name="我沒有買花束" checked onchange="calculate()">
+        <div class="item-info"><span class="item-name">我沒有買花束</span><span class="item-price">$0</span></div>
+    </label>
+    <label class="selection-row">
+        <input type="radio" name="binding" value="150" data-name="蝴蝶結" onchange="calculate()">
         <div class="item-info"><span class="item-name">蝴蝶結</span><span class="item-price">$150</span></div>
     </label>
     <label class="selection-row">
@@ -152,10 +156,7 @@
         <input type="radio" name="binding" value="150" data-name="圓柱桶花盆" onchange="calculate()">
         <div class="item-info"><span class="item-name">圓柱桶花盆 (可自己站立)</span><span class="item-price">$150</span></div>
     </label>
-    <label class="selection-row">
-        <input type="radio" name="binding" value="0" data-name="我沒有買花束" onchange="calculate()">
-        <div class="item-info"><span class="item-name">我沒有買花束</span><span class="item-price">$0</span></div>
-    </label>
+
 
     <div id="calculator-content"></div>
 
@@ -314,6 +315,7 @@
 </script>
 </body>
 </html>
+
 
 
 
