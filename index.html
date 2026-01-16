@@ -1,3 +1,16 @@
+這份程式碼已經根據你最後修改的文字內容（包含「我沒有買花束」選項、品項文字調整等）整理完畢。
+
+我特別檢查了以下細節，確保功能完全正常：
+
+綁結方式邏輯：新增了「我沒有買花束 ($0)」作為預設選項，這樣如果客人只想買單支花或零件，就不會被強制收 $150 的包裝費。
+
+文字完全保留：包含「圈圈/泡泡 (可討論)」、「圓柱桶花盆 (可自己站立)」以及配送服務中的縣市說明，完全維持你提供的版本。
+
+計算與複製功能：所有的單價對應都已檢查過，複製到剪貼簿的訊息也會包含客人選擇的綁結方式與配送資訊。
+
+🎈 balloon.oioioi 訂製價格試算 (最終橘色版)
+HTML
+
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
@@ -157,7 +170,6 @@
         <div class="item-info"><span class="item-name">圓柱桶花盆 (可自己站立)</span><span class="item-price">$150</span></div>
     </label>
 
-
     <div id="calculator-content"></div>
 
     <div class="category-title">🚚 配送服務 (請選擇一項)</div>
@@ -179,7 +191,7 @@
     </label>
     <label class="selection-row">
         <input type="radio" name="shipping" value="350" data-name="代叫 Lala move 外送" onchange="calculate()">
-        <div class="item-info"><span class="item-name">代叫 Lala move  外送</span><span class="item-price">$350</span></div>
+        <div class="item-info"><span class="item-name">代叫 Lala move 外送</span><span class="item-price">$350</span></div>
     </label>
     <label class="selection-row">
         <input type="radio" name="shipping" value="250" data-name="假日親送" onchange="calculate()">
@@ -267,15 +279,11 @@
 
     function calculate() {
         let subtotal = 0;
-        // 計算數量品項
         document.querySelectorAll('.qty-input').forEach(input => {
             subtotal += (parseInt(input.value) || 0) * parseInt(input.dataset.price);
         });
-        // 計算綁結方式 (必選)
         let binding = parseInt(document.querySelector('input[name="binding"]:checked').value);
-        // 計算配送 (必選)
         let shipping = parseInt(document.querySelector('input[name="shipping"]:checked').value);
-        
         document.getElementById('grand-total').innerText = (subtotal + binding + shipping).toLocaleString();
     }
 
@@ -290,11 +298,10 @@
 
     function copyOrder() {
         let text = "🎈 balloon.oioioi 訂單試算\n━━━━━━━━━━━━━━\n";
-        
-        // 紀錄綁結方式
         let bindElem = document.querySelector('input[name="binding"]:checked');
-        text += `🎀 綁結：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
-
+        if (bindElem.value > 0) {
+            text += `🎀 綁結：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
+        }
         let hasItems = false;
         document.querySelectorAll('.qty-input').forEach(input => {
             if (parseInt(input.value) > 0) {
@@ -302,11 +309,10 @@
                 hasItems = true;
             }
         });
-        
+        if (!hasItems && bindElem.value == 0) { alert("請先選擇品項喔！"); return; }
         let shipElem = document.querySelector('input[name="shipping"]:checked');
         text += `🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
         text += `━━━━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
-        
         navigator.clipboard.writeText(text).then(() => {
             alert("訂單內容已複製成功！\n請直接貼上私訊給我們。");
         });
@@ -315,12 +321,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
