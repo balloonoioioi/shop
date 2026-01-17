@@ -161,8 +161,12 @@
 
     <div class="category-title">🚚 配送服務 (請選擇一項)</div>
     <label class="selection-row">
-        <input type="radio" name="shipping" value="0" data-name="迴龍捷運站自取" checked onchange="calculate()">
-        <div class="item-info"><span class="item-name">迴龍捷運站自取</span><span class="item-price">$0</span></div>
+        <input type="radio" name="shipping" value="0" data-name="捷運迴龍站自取" checked onchange="calculate()">
+        <div class="item-info"><span class="item-name">捷運迴龍站自取</span><span class="item-price">$0</span></div>
+    </label>
+        <label class="selection-row">
+        <input type="radio" name="shipping" value="0" data-name="運新蘆線任一站面交" onchange="calculate()">
+        <div class="item-info"><span class="item-name">捷運新蘆線任一站面交 (須金額滿$1000)</span><span class="item-price">$0</span></div>
     </label>
     <label class="selection-row">
         <input type="radio" name="shipping" value="100" data-name="大台北當日快捷" onchange="calculate()">
@@ -308,6 +312,7 @@
 </script>
 </body>
 </html>
+
 
 
 
