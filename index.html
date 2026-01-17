@@ -191,7 +191,7 @@
 
     <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 40px; line-height: 1.6;">
         * 金額僅供參考，實際金額依討論內容為主 *<br>
-        * 確認訂購請點擊下方複製內容並私訊截圖 *
+        * 確認訂購請點擊下方複製內容並私訊IG *
     </p>
 </div>
 
@@ -305,13 +305,14 @@
         text += `🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
         text += `━━━━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
         navigator.clipboard.writeText(text).then(() => {
-            alert("訂單內容已複製成功！\n請直接貼上私訊給我們。");
+            alert("訂單內容已複製成功！\n請直接貼上私訊IG給我們。");
         });
     }
     calculate();
 </script>
 </body>
 </html>
+
 
 
 
