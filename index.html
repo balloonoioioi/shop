@@ -10,12 +10,13 @@
             --dark-orange: #fb8c00;
             --bg-soft: #fffdfa;
             --accent: #e65100;
+            --warning-red: #d32f2f; /* 新增紅色提醒色 */
         }
         body {
             font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-soft);
             margin: 0; padding: 15px; color: #444;
-            padding-bottom: 150px;
+            padding-bottom: 220px; /* 增加底部留白空間，防止被擋住 */
         }
         .container {
             max-width: 500px;
@@ -140,7 +141,18 @@
             border-radius: 10px;
             margin-bottom: 10px;
             font-weight: bold;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        .important-notice {
+            color: var(--warning-red);
+            font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
             font-size: 0.9rem;
+            background: #fff0f0;
+            padding: 10px;
+            border-radius: 10px;
         }
     </style>
 </head>
@@ -190,7 +202,7 @@
         <input type="radio" name="shipping" value="250" data-name="順豐/黑貓隔日" onchange="calculate()">
         <div class="item-info"><span class="item-name">無快捷服務地區 (順豐/黑貓隔日)</span><span class="item-price">$250</span></div>
     </label>
-    <label class="selection-row">
+    <label class="shipping-row">
         <input type="radio" name="shipping" value="350" data-name="代叫 Lala move 外送" onchange="calculate()">
         <div class="item-info"><span class="item-name">代叫 Lala move 外送 ($350以上)</span><span class="item-price">$350</span></div>
     </label>
@@ -199,9 +211,12 @@
         <div class="item-info"><span class="item-name">假日開車親送 (限20km內)</span><span class="item-price">$250</span></div>
     </label>
 
-    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 40px; line-height: 1.6;">
-        * 金額僅供參考，實際金額依討論內容為主 *<br>
-        * 確認訂購請點擊下方複製內容並私訊IG *
+    <div class="important-notice">
+        ⚠️ 確認訂購請點擊下方「複製訂單內容」並私訊IG
+    </div>
+
+    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 20px; line-height: 1.6;">
+        * 金額僅供參考，實際金額依討論內容為主 *
     </p>
 </div>
 
