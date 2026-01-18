@@ -202,7 +202,7 @@
         <div class="item-info"><span class="item-name">假日開車親送 (限20km內)</span><span class="item-price">$250</span></div>
     </label>
 
-    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 20px; line-height: 1.8;">
+    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 50px; line-height: 1.8;">
         * 確認訂購請點擊下方複製內容並私訊IG *<br>
         * 金額僅供參考 實際金額依討論內容為主 *
     </p>
@@ -263,11 +263,12 @@
         group.items.forEach(item => {
             const row = document.createElement('div');
             row.className = 'item-row';
+            // 在這裡加入 data-category 屬性
             row.innerHTML = `
                 <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">$${item.price}</span></div>
                 <div class="qty-control">
                     <button class="qty-btn" onclick="changeQty(this, -1)">-</button>
-                    <input type="number" class="qty-input" data-name="${item.name}" data-price="${item.price}" value="0" min="0" onchange="calculate()">
+                    <input type="number" class="qty-input" data-category="${group.category}" data-name="${item.name}" data-price="${item.price}" value="0" min="0" onchange="calculate()">
                     <button class="qty-btn" onclick="changeQty(this, 1)">+</button>
                 </div>
             `;
@@ -304,33 +305,42 @@
     }
 
     function copyOrder() {
-        let text = "✿ balloon.oioioi 訂單試算\n━━━━━━━━━━━\n";
+        let text = "🎈 balloon.oioioi 訂單試算\n━━━━━━━━━━━\n";
+        
+        // 綁結方式
         let bindElem = document.querySelector('input[name="binding"]:checked');
         if (bindElem.value > 0) {
-            text += `🎀 綁結：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
+            text += `🎀 綁結方式：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
         }
-        let hasItems = false;
-        document.querySelectorAll('.qty-input').forEach(input => {
-            if (parseInt(input.value) > 0) {
-                text += `▫️ ${input.dataset.name} x ${input.value}\n`;
-                hasItems = true;
-            }
+
+        let grandHasItems = false;
+        // 依照分類來過濾品項
+        data.forEach(group => {
+            let groupHeader = `\n【 ${group.category} 】\n`;
+            let hasItemsInGroup = false;
+
+            document.querySelectorAll('.qty-input').forEach(input => {
+                if (parseInt(input.value) > 0 && input.dataset.category === group.category) {
+                    text += (hasItemsInGroup ? "" : groupHeader);
+                    text += `▫️ ${input.dataset.name} x ${input.value}\n`;
+                    hasItemsInGroup = true;
+                    grandHasItems = true;
+                }
+            });
         });
-        if (!hasItems && bindElem.value == 0) { alert("請先選擇品項喔！"); return; }
+
+        if (!grandHasItems && bindElem.value == 0) { alert("請先選擇品項喔！"); return; }
+        
+        // 配送資訊
         let shipElem = document.querySelector('input[name="shipping"]:checked');
-        text += `🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
+        text += `\n🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
         text += `━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
+        
         navigator.clipboard.writeText(text).then(() => {
-            alert("訂單內容已複製成功！\n請直接貼上私訊IG給我們。");
+            alert("訂單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
         });
     }
     calculate();
 </script>
 </body>
 </html>
-
-
-
-
-
-
