@@ -316,7 +316,7 @@
         let grandHasItems = false;
         // 依照分類來過濾品項
         data.forEach(group => {
-            let groupHeader = `\n【 ${group.category} 】\n`;
+            let groupHeader = `\n ${group.category} \n`;
             let hasItemsInGroup = false;
 
             document.querySelectorAll('.qty-input').forEach(input => {
@@ -344,4 +344,5 @@
 </script>
 </body>
 </html>
+
 
