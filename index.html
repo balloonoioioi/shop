@@ -59,10 +59,12 @@
         .item-info { flex-grow: 1; padding-right: 12px; display: flex; align-items: center; }
         .item-name { display: block; font-weight: 500; font-size: 0.95rem; line-height: 1.5; color: #333; }
         .item-price { color: #888; font-size: 0.85rem; font-weight: bold; margin-left: 8px; }
+        
+        /* 調整數量控制區塊的間距 */
         .qty-control {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 5px; /* 原本是 10px，現在改為 5px 讓它更密集 */
         }
         .qty-btn {
             width: 32px;
@@ -79,8 +81,10 @@
             user-select: none;
         }
         .qty-btn:active { background: var(--primary-orange); color: white; transform: scale(0.9); }
+        
+        /* 縮小輸入框寬度 */
         input[type="number"] {
-            width: 35px;
+            width: 30px; /* 原本是 35px，現在縮小到 30px */
             border: none;
             text-align: center;
             font-size: 1.1rem;
@@ -88,6 +92,7 @@
             color: var(--accent);
             background: transparent;
         }
+        
         .total-section {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -132,7 +137,6 @@
             color: #b8860b;
             cursor: pointer;
         }
-        /* 質感橘色背景、無邊框、非粗體 */
         .welcome-note {
             background-color: #fff9f0;
             color: var(--accent);
