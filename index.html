@@ -304,7 +304,7 @@
     }
 
     function copyOrder() {
-        let text = "✿ balloon.oioioi 訂單試算\n━━━━━━━━━━━━━━\n";
+        let text = "✿ balloon.oioioi 訂單試算\n━━━━━━━━━━━\n";
         let bindElem = document.querySelector('input[name="binding"]:checked');
         if (bindElem.value > 0) {
             text += `🎀 綁結：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
@@ -319,7 +319,7 @@
         if (!hasItems && bindElem.value == 0) { alert("請先選擇品項喔！"); return; }
         let shipElem = document.querySelector('input[name="shipping"]:checked');
         text += `🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
-        text += `━━━━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
+        text += `━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
         navigator.clipboard.writeText(text).then(() => {
             alert("訂單內容已複製成功！\n請直接貼上私訊IG給我們。");
         });
@@ -328,5 +328,6 @@
 </script>
 </body>
 </html>
+
 
 
