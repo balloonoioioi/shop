@@ -156,8 +156,8 @@
     
     <div class="category-title">་۪ ✿◞ 氣球花花束綁結方式 (必選一項)</div>
     <label class="selection-row">
-        <input type="radio" name="binding" value="0" data-name="我沒有買氣球花束" checked onchange="calculate()">
-        <div class="item-info"><span class="item-name">我沒有買氣球花束</span><span class="item-price">$0</span></div>
+        <input type="radio" name="binding" value="0" data-name="無購買氣球花束" checked onchange="calculate()">
+        <div class="item-info"><span class="item-name">無購買氣球花束</span><span class="item-price">$0</span></div>
     </label>
     <label class="selection-row">
         <input type="radio" name="binding" value="150" data-name="蝴蝶結" onchange="calculate()">
@@ -304,7 +304,7 @@
     }
 
     function copyOrder() {
-        let text = "🎈 balloon.oioioi 訂單試算\n━━━━━━━━━━━━━━\n";
+        let text = "✿ balloon.oioioi 訂單試算\n━━━━━━━━━━━━━━\n";
         let bindElem = document.querySelector('input[name="binding"]:checked');
         if (bindElem.value > 0) {
             text += `🎀 綁結：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
@@ -328,6 +328,7 @@
 </script>
 </body>
 </html>
+
 
 
 
