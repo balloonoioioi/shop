@@ -132,7 +132,7 @@
             color: #b8860b;
             cursor: pointer;
         }
-        /* 調整後的樣式：保留背景，移除框線 */
+        /* 質感橘色背景、無邊框、非粗體 */
         .welcome-note {
             background-color: #fff9f0;
             color: var(--accent);
@@ -300,7 +300,7 @@
     }
 
     function copyOrder() {
-        let text = "✿ balloon.oioioi 訂單試算\n━━━━━━━━━━━━━━\n";
+        let text = "🎈 balloon.oioioi 訂單試算\n━━━━━━━━━━━━━━\n";
         let bindElem = document.querySelector('input[name="binding"]:checked');
         if (bindElem.value > 0) {
             text += `🎀 綁結：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
@@ -324,10 +324,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
