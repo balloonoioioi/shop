@@ -132,6 +132,16 @@
             color: #b8860b;
             cursor: pointer;
         }
+        .welcome-note {
+            background-color: #fff9f0;
+            border: 1px dashed var(--dark-orange);
+            color: var(--accent);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
     </style>
 </head>
 <body>
@@ -164,7 +174,7 @@
         <input type="radio" name="shipping" value="0" data-name="捷運迴龍站自取" checked onchange="calculate()">
         <div class="item-info"><span class="item-name">捷運迴龍站自取</span><span class="item-price">$0</span></div>
     </label>
-        <label class="selection-row">
+    <label class="selection-row">
         <input type="radio" name="shipping" value="0" data-name="捷運新蘆線面交" onchange="calculate()">
         <div class="item-info"><span class="item-name">捷運新蘆線任一站面交 (須金額滿$1000)</span><span class="item-price">$0</span></div>
     </label>
@@ -196,6 +206,7 @@
 </div>
 
 <div class="total-section">
+    <div class="welcome-note">✨ 歡迎截圖詢價，如有預算限制歡迎私訊討論 ✨</div>
     <div style="font-size: 0.85rem; color: #888;">含運費總金額</div>
     <div class="total-amount">NT$ <span id="grand-total">0</span></div>
     <div class="btn-group">
@@ -312,13 +323,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
