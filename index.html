@@ -15,7 +15,7 @@
             font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-soft);
             margin: 0; padding: 15px; color: #444;
-            padding-bottom: 220px; /* 確保內容能滑出底部欄位上方 */
+            padding-bottom: 220px;
         }
         .container {
             max-width: 500px;
@@ -132,14 +132,12 @@
             color: #b8860b;
             cursor: pointer;
         }
+        /* 修正後的提醒文字樣式：無邊框、非粗體 */
         .welcome-note {
-            background-color: #fff9f0;
-            border: 1px dashed var(--dark-orange);
             color: var(--accent);
-            padding: 10px;
-            border-radius: 10px;
-            margin-bottom: 10px;
-            font-weight: bold;
+            padding: 5px;
+            margin-bottom: 8px;
+            font-weight: normal;
             font-size: 0.85rem;
             line-height: 1.4;
         }
