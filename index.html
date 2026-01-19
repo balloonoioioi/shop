@@ -15,7 +15,7 @@
             font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-soft);
             margin: 0; padding: 15px; color: #444;
-            padding-bottom: 220px;
+            padding-bottom: 240px; /* 增加底部留白，確保滑動到底部能看到提醒文字 */
         }
         .container {
             max-width: 500px;
@@ -23,7 +23,7 @@
             background: white;
             padding: 20px;
             border-radius: 25px;
-            box-shadow: 0 10px 30px rgba(251, 140, 0, 0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         h1 {
             text-align: center;
@@ -60,10 +60,11 @@
         .item-name { display: block; font-weight: 500; font-size: 0.95rem; line-height: 1.5; color: #333; }
         .item-price { color: #888; font-size: 0.85rem; font-weight: bold; margin-left: 8px; }
         
+        /* 數量控制區塊：間距更密 */
         .qty-control {
             display: flex;
             align-items: center;
-            gap: 3px; /* 緊湊間距 */
+            gap: 3px;
         }
         .qty-btn {
             width: 32px;
@@ -81,8 +82,9 @@
         }
         .qty-btn:active { background: var(--primary-orange); color: white; transform: scale(0.9); }
         
+        /* 輸入框：更緊湊 */
         input[type="number"] {
-            width: 25px; /* 緊湊寬度 */
+            width: 25px;
             border: none;
             text-align: center;
             font-size: 1.1rem;
@@ -135,6 +137,7 @@
             color: #b8860b;
             cursor: pointer;
         }
+        /* 歡迎文字樣式：保留淺橘底色，移除框線，非粗體 */
         .welcome-note {
             background-color: #fff9f0;
             color: var(--accent);
@@ -263,7 +266,7 @@
         group.items.forEach(item => {
             const row = document.createElement('div');
             row.className = 'item-row';
-            // 在這裡加入 data-category 屬性
+            // 重要：為輸入框加入 data-category 屬性
             row.innerHTML = `
                 <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">$${item.price}</span></div>
                 <div class="qty-control">
@@ -305,33 +308,31 @@
     }
 
     function copyOrder() {
-        let text = "balloon.oioioi 訂單試算\n━━━━━━━━━━━\n";
+        let text = "✿ balloon.oioioi 訂單試算\n━━━━━━━━━━━\n";
         
-        // 綁結方式
         let bindElem = document.querySelector('input[name="binding"]:checked');
         if (bindElem.value > 0) {
             text += `🎀 綁結方式：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
         }
 
         let grandHasItems = false;
-        // 依照分類來過濾品項
+        // 依照分類分類呈現私訊內容
         data.forEach(group => {
-            let groupHeader = `\n ${group.category} \n`;
             let hasItemsInGroup = false;
+            let groupText = `\n ${group.category} \n`;
 
             document.querySelectorAll('.qty-input').forEach(input => {
                 if (parseInt(input.value) > 0 && input.dataset.category === group.category) {
-                    text += (hasItemsInGroup ? "" : groupHeader);
-                    text += `▫️ ${input.dataset.name} x ${input.value}\n`;
+                    groupText += `▫️ ${input.dataset.name} x ${input.value}\n`;
                     hasItemsInGroup = true;
                     grandHasItems = true;
                 }
             });
+            if (hasItemsInGroup) text += groupText;
         });
 
         if (!grandHasItems && bindElem.value == 0) { alert("請先選擇品項喔！"); return; }
         
-        // 配送資訊
         let shipElem = document.querySelector('input[name="shipping"]:checked');
         text += `\n🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
         text += `━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
@@ -344,8 +345,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
