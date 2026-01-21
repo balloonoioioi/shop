@@ -224,7 +224,7 @@
     <div class="total-amount">NT$ <span id="grand-total">0</span></div>
     <div class="btn-group">
         <button class="reset-btn" onclick="resetForm()">重設</button>
-        <button class="copy-btn" onclick="copyOrder()">複製訂單內容</button>
+        <button class="copy-btn" onclick="copyOrder()">複製表單內容</button>
     </div>
 </div>
 
@@ -353,13 +353,14 @@
         text += `━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
         
         navigator.clipboard.writeText(text).then(() => {
-            alert("訂單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
+            alert("表單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
         });
     }
     calculate();
 </script>
 </body>
 </html>
+
 
 
 
