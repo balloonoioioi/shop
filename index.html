@@ -76,6 +76,7 @@
             border-left: 6px solid var(--primary-orange);
             font-size: 1rem;
         }
+        /* 調整品項行距為 5px */
         .item-row, .selection-row {
             display: flex;
             justify-content: space-between;
@@ -323,7 +324,6 @@
     const container = document.getElementById('calculator-content');
     data.forEach(group => {
         const catDiv = document.createElement('div');
-        // 渲染分類標題 (icon 已經在 data 裡面了，所以直接顯示)
         catDiv.innerHTML = `<div class="category-title">${group.category}</div>`;
         group.items.forEach(item => {
             const row = document.createElement('div');
@@ -379,7 +379,7 @@
         let grandHasItems = false;
         data.forEach(group => {
             let hasItemsInGroup = false;
-            // 標題顯示：icon 已在 group.category 中，移除外層的 【 】
+            // 移除複製文字標題中的 【 】
             let groupHeader = `\n ${group.category} \n`;
 
             document.querySelectorAll('.qty-input').forEach(input => {
@@ -406,11 +406,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
