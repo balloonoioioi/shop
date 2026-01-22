@@ -15,7 +15,7 @@
             font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-soft);
             margin: 0; padding: 15px; color: #444;
-            padding-bottom: 240px; /* 增加底部留白，確保滑動到底部能看到提醒文字 */
+            padding-bottom: 240px; 
         }
         .container {
             max-width: 500px;
@@ -60,7 +60,7 @@
         .item-name { display: block; font-weight: 500; font-size: 0.95rem; line-height: 1.5; color: #333; }
         .item-price { color: #888; font-size: 0.85rem; font-weight: bold; margin-left: 8px; }
         
-        /* 數量控制區塊：間距更密 */
+        /* 數量控制區塊：極緊湊 */
         .qty-control {
             display: flex;
             align-items: center;
@@ -82,7 +82,6 @@
         }
         .qty-btn:active { background: var(--primary-orange); color: white; transform: scale(0.9); }
         
-        /* 輸入框：更緊湊 */
         input[type="number"] {
             width: 25px;
             border: none;
@@ -137,7 +136,6 @@
             color: #b8860b;
             cursor: pointer;
         }
-        /* 歡迎文字樣式：保留淺橘底色，移除框線，非粗體 */
         .welcome-note {
             background-color: #fff9f0;
             color: var(--accent);
@@ -176,10 +174,11 @@
         <input type="radio" name="binding" value="250" data-name="紙花盆/花籃" onchange="calculate()">
         <div class="item-info"><span class="item-name">紙花盆/花籃 (正式，長輩/開幕)</span><span class="item-price">$250</span></div>
     </label>
-        <label class="selection-row">
+    <label class="selection-row">
         <input type="radio" name="binding" value="350" data-name="紙花盒/方框" onchange="calculate()">
-        <div class="item-info"><span class="item-name">紙花盒/方框 (高質感，重要場合) </span><span class="item-price">$350</span></div>
+        <div class="item-info"><span class="item-name">紙花盒/方框 (高質感，重要場合)</span><span class="item-price">$350</span></div>
     </label>
+
     <div id="calculator-content"></div>
 
     <div class="category-title">་۪ ✿◞ 配送服務 (請選擇一項)</div>
@@ -242,7 +241,7 @@
             { name: "向日葵", price: 450 }, { name: "山茶花", price: 470 },
             { name: "手折角色/人偶 (依難易度$400-$800)", price: 450 },{ name: "波波球中球 (含貼字及緞帶)", price: 590 }
         ]},
-         { category: "་۪ ✿◞ 花束加購品項 ", items: [
+        { category: "་۪ ✿◞ 花束加購品項", items: [
             { name: "數字氣球 (0-9)", price: 80 },
             { name: "中英文客製化貼字 (長度10個單字左右)", price: 100 },
             { name: "裙邊網紗", price: 100 },
@@ -277,11 +276,10 @@
     const container = document.getElementById('calculator-content');
     data.forEach(group => {
         const catDiv = document.createElement('div');
-        catDiv.innerHTML = `<div class="category-title">${group.category}</div>`;
+        catDiv.innerHTML = `<div class="category-title">་۪ ✿◞ ${group.category}</div>`;
         group.items.forEach(item => {
             const row = document.createElement('div');
             row.className = 'item-row';
-            // 重要：為輸入框加入 data-category 屬性
             row.innerHTML = `
                 <div class="item-info"><span class="item-name">${item.name}</span><span class="item-price">$${item.price}</span></div>
                 <div class="qty-control">
@@ -331,19 +329,18 @@
         }
 
         let grandHasItems = false;
-        // 依照分類分類呈現私訊內容
         data.forEach(group => {
             let hasItemsInGroup = false;
-            let groupText = `\n ${group.category} \n`;
+            let groupHeader = `\n ${group.category} \n`;
 
             document.querySelectorAll('.qty-input').forEach(input => {
                 if (parseInt(input.value) > 0 && input.dataset.category === group.category) {
-                    groupText += `▫️ ${input.dataset.name} x ${input.value}\n`;
+                    text += (hasItemsInGroup ? "" : groupHeader);
+                    text += `▫️ ${input.dataset.name} x ${input.value}\n`;
                     hasItemsInGroup = true;
                     grandHasItems = true;
                 }
             });
-            if (hasItemsInGroup) text += groupText;
         });
 
         if (!grandHasItems && bindElem.value == 0) { alert("請先選擇品項喔！"); return; }
@@ -360,5 +357,3 @@
 </script>
 </body>
 </html>
-
-
