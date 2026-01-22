@@ -76,12 +76,11 @@
             border-left: 6px solid var(--primary-orange);
             font-size: 1rem;
         }
-        /* 極致縮小品項間的行距 */
         .item-row, .selection-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5px; /* 由 8px 縮小至 5px */
+            padding: 5px; 
             border-bottom: 1px solid #fcfcfc;
         }
         .selection-row {
@@ -259,7 +258,7 @@
         <div class="item-info"><span class="item-name">假日開車親送 (限20km內)</span><span class="item-price">$250</span></div>
     </label>
 
-    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 20px; line-height: 1.8;">
+    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 50px; line-height: 1.8;">
         * 確認訂購請點擊下方複製內容並私訊IG *<br>
         * 金額僅供參考 實際金額依討論內容為主 *
     </p>
@@ -314,7 +313,7 @@
             { name: "大玫瑰", price: 350 }, { name: "GD雛菊", price: 380 },
             { name: "向日葵", price: 490 }, { name: "山茶花", price: 520 }
         ]},
-        { category: "捧花系列", items: [
+        { category: "་۪ ✿◞ 大型 / 巨型 / 捧花系列", items: [
             { name: "大型玫瑰", price: 890 }, { name: "大型GD雛菊", price: 900 },
             { name: "大型向日葵", price: 1090 }, { name: "巨型玫瑰", price: 1390 },
             { name: "捧花 (7朵五瓣花)", price: 1480 }
@@ -324,7 +323,8 @@
     const container = document.getElementById('calculator-content');
     data.forEach(group => {
         const catDiv = document.createElement('div');
-        catDiv.innerHTML = `<div class="category-title">་۪ ✿◞ ${group.category}</div>`;
+        // 渲染分類標題 (icon 已經在 data 裡面了，所以直接顯示)
+        catDiv.innerHTML = `<div class="category-title">${group.category}</div>`;
         group.items.forEach(item => {
             const row = document.createElement('div');
             row.className = 'item-row';
@@ -379,7 +379,7 @@
         let grandHasItems = false;
         data.forEach(group => {
             let hasItemsInGroup = false;
-            // 修正為您要求的格式：移除 【 】
+            // 標題顯示：icon 已在 group.category 中，移除外層的 【 】
             let groupHeader = `\n ${group.category} \n`;
 
             document.querySelectorAll('.qty-input').forEach(input => {
@@ -399,11 +399,10 @@
         text += `━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
         
         navigator.clipboard.writeText(text).then(() => {
-            alert("表單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
+            alert("訂單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
         });
     }
     calculate();
 </script>
 </body>
 </html>
-
