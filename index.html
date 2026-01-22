@@ -15,7 +15,7 @@
             font-family: 'PingFang TC', 'Microsoft JhengHei', sans-serif;
             background-color: var(--bg-soft);
             margin: 0; padding: 15px; color: #444;
-            padding-bottom: 240px; 
+            padding-bottom: 220px;
         }
         .container {
             max-width: 500px;
@@ -29,8 +29,45 @@
             text-align: center;
             color: var(--dark-orange);
             font-size: 1.5rem;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
+        /* 熱門組合卡片樣式 */
+        .promo-card {
+            background: #fff9f0;
+            border: 1px solid var(--primary-orange);
+            border-radius: 18px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .promo-title {
+            color: var(--accent);
+            font-weight: bold;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+        }
+        .promo-desc {
+            font-size: 0.8rem;
+            color: #888;
+            margin-bottom: 12px;
+        }
+        .promo-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        .promo-item {
+            background: white;
+            padding: 8px;
+            border-radius: 10px;
+            color: #555;
+        }
+        .promo-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
         .category-title {
             background: #fff3e0;
             padding: 10px 15px;
@@ -41,12 +78,11 @@
             border-left: 6px solid var(--primary-orange);
             font-size: 1rem;
         }
-        /* 縮小品項間的行距 */
         .item-row, .selection-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 5px; /* 原本 14px，縮小至 8px */
+            padding: 8px 5px;
             border-bottom: 1px solid #fcfcfc;
         }
         .selection-row {
@@ -152,6 +188,19 @@
 
 <div class="container">
     <h1>✿ balloon.oioioi 價格試算</h1>
+
+    <div class="promo-card">
+        <div class="promo-title">💡 氣球花基本款熱門組合</div>
+        <div class="promo-desc">( 蝴蝶結裝飾 + 六瓣花 / 鬱金香 )</div>
+        <div class="promo-grid">
+            <div class="promo-item">3 朵 <span class="promo-price">$600</span></div>
+            <div class="promo-item">5 朵 <span class="promo-price">$900</span></div>
+            <div class="promo-item">7 朵 <span class="promo-price">$1200</span></div>
+            <div class="promo-item">10 朵 <span class="promo-price">$1650</span></div>
+            <div class="promo-item" style="grid-column: span 2;">熱門大束 15 朵 <span class="promo-price">$2400</span></div>
+        </div>
+        <div style="font-size: 0.75rem; color: #aaa; margin-top: 10px;">* 可在下方選項自行選購對應數量 *</div>
+    </div>
     
     <div class="category-title">་۪ ✿◞ 氣球花花束綁結方式 (必選一項)</div>
     <label class="selection-row">
@@ -168,7 +217,7 @@
     </label>
     <label class="selection-row">
         <input type="radio" name="binding" value="150" data-name="圓柱桶花盆" onchange="calculate()">
-        <div class="item-info"><span class="item-name">圓柱桶花盆 (可站立，送家人/擺桌)</span><span class="item-price">$150</span></div>
+        <div class="item-info"><span class="item-name">圓柱桶花盆 (可自己站立)</span><span class="item-price">$150</span></div>
     </label>
     <label class="selection-row">
         <input type="radio" name="binding" value="250" data-name="紙花盆/花籃" onchange="calculate()">
@@ -211,7 +260,7 @@
         <div class="item-info"><span class="item-name">假日開車親送 (限20km內)</span><span class="item-price">$250</span></div>
     </label>
 
-    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 20px; line-height: 1.8;">
+    <p style="font-size: 0.8rem; color: #bbb; text-align: center; margin-top: 50px; line-height: 1.8;">
         * 確認訂購請點擊下方複製內容並私訊IG *<br>
         * 金額僅供參考 實際金額依討論內容為主 *
     </p>
@@ -229,7 +278,7 @@
 
 <script>
     const data = [
-        { category: "་۪ ✿◞ 花束自行搭配花型 (附提袋)", items: [
+        { category: "🌸 花束自行搭配花型 (附提袋)", items: [
             { name: "長條捲捲", price: 80 }, { name: "圓形氣球", price: 100 },
             { name: "愛心氣球", price: 100 }, { name: "尤加利葉", price: 120 },
             { name: "鬱金香", price: 150 }, { name: "六瓣花", price: 150 },
@@ -241,7 +290,7 @@
             { name: "向日葵", price: 450 }, { name: "山茶花", price: 470 },
             { name: "手折角色/人偶 (依難易度$400-$800)", price: 450 },{ name: "波波球中球 (含貼字及緞帶)", price: 590 }
         ]},
-        { category: "་۪ ✿◞ 花束加購品項", items: [
+        { category: "✨ 花束加購品項", items: [
             { name: "數字氣球 (0-9)", price: 80 },
             { name: "中英文客製化貼字 (長度10個單字左右)", price: 100 },
             { name: "裙邊網紗", price: 100 },
@@ -249,14 +298,14 @@
             { name: "代寫卡片", price: 80 },
             { name: "燈串 (三段式閃燈調節電源)", price: 100 }
         ]},
-        { category: "་۪ ✿◞ 氣球蛋糕訂購 (附綁帶)/角色波波杯 ", items: [
+        { category: "🧸 氣球蛋糕訂購 (附綁帶)/角色波波杯 ", items: [
             { name: "小氣球蛋糕", price: 490 },
             { name: "大氣球蛋糕", price: 590 },
             { name: "三層大氣球蛋糕", price: 720 },
             { name: "小熊波波杯 (不含食物)", price: 250 },
             { name: "角色波波杯 (不含食物)", price: 300 }
         ]},
-        { category: "་۪ ✿◞ 單支氣球花 (含葉子/透明包裝/提袋)", items: [
+        { category: "🛍️ 單支氣球花 (含葉子/透明包裝/提袋)", items: [
             { name: "小熊", price: 250 },
             { name: "小熊 (牛仔包裝)", price: 290 },
             { name: "鬱金香/五瓣花/六瓣花", price: 250 },
@@ -266,7 +315,7 @@
             { name: "大玫瑰", price: 350 }, { name: "GD雛菊", price: 380 },
             { name: "向日葵", price: 490 }, { name: "山茶花", price: 520 }
         ]},
-        { category: "་۪ ✿◞ 大型 / 巨型 / 捧花系列", items: [
+        { category: "捧花系列", items: [
             { name: "大型玫瑰", price: 890 }, { name: "大型GD雛菊", price: 900 },
             { name: "大型向日葵", price: 1090 }, { name: "巨型玫瑰", price: 1390 },
             { name: "捧花 (7朵五瓣花)", price: 1480 }
@@ -276,7 +325,8 @@
     const container = document.getElementById('calculator-content');
     data.forEach(group => {
         const catDiv = document.createElement('div');
-        catDiv.innerHTML = `<div class="category-title">${group.category}</div>`;
+        // 標題顯示維持 ་۪ ✿◞ 裝飾
+        catDiv.innerHTML = `<div class="category-title">་۪ ✿◞ ${group.category}</div>`;
         group.items.forEach(item => {
             const row = document.createElement('div');
             row.className = 'item-row';
@@ -331,7 +381,7 @@
         let grandHasItems = false;
         data.forEach(group => {
             let hasItemsInGroup = false;
-            // 標題去除 【 】 符號
+            // 移除複製文字標題中的 【 】 括號
             let groupHeader = `\n ${group.category} \n`;
 
             document.querySelectorAll('.qty-input').forEach(input => {
