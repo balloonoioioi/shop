@@ -41,11 +41,12 @@
             border-left: 6px solid var(--primary-orange);
             font-size: 1rem;
         }
+        /* 縮小品項間的行距 */
         .item-row, .selection-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 5px;
+            padding: 8px 5px; /* 原本 14px，縮小至 8px */
             border-bottom: 1px solid #fcfcfc;
         }
         .selection-row {
@@ -60,7 +61,6 @@
         .item-name { display: block; font-weight: 500; font-size: 0.95rem; line-height: 1.5; color: #333; }
         .item-price { color: #888; font-size: 0.85rem; font-weight: bold; margin-left: 8px; }
         
-        /* 數量控制區塊：極緊湊 */
         .qty-control {
             display: flex;
             align-items: center;
@@ -276,7 +276,7 @@
     const container = document.getElementById('calculator-content');
     data.forEach(group => {
         const catDiv = document.createElement('div');
-        catDiv.innerHTML = `<div class="category-title">་۪ ✿◞ ${group.category}</div>`;
+        catDiv.innerHTML = `<div class="category-title">${group.category}</div>`;
         group.items.forEach(item => {
             const row = document.createElement('div');
             row.className = 'item-row';
@@ -331,6 +331,7 @@
         let grandHasItems = false;
         data.forEach(group => {
             let hasItemsInGroup = false;
+            // 標題去除 【 】 符號
             let groupHeader = `\n ${group.category} \n`;
 
             document.querySelectorAll('.qty-input').forEach(input => {
@@ -350,7 +351,7 @@
         text += `━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
         
         navigator.clipboard.writeText(text).then(() => {
-            alert("表單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
+            alert("訂單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
         });
     }
     calculate();
