@@ -31,22 +31,19 @@
             font-size: 1.5rem;
             margin-bottom: 20px;
         }
-
-        /* 訂購流程圖樣式 */
         .order-flow-box {
             width: 100%;
             margin-bottom: 25px;
             border-radius: 18px;
             overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            line-height: 0; /* 消除圖片下方的細微間隙 */
+            line-height: 0;
         }
         .order-flow-box img {
             width: 100%;
             height: auto;
             display: block;
         }
-
         .promo-card {
             background: #fff9f0;
             border: 1px solid var(--primary-orange);
@@ -92,6 +89,7 @@
             border-left: 6px solid var(--primary-orange);
             font-size: 1rem;
         }
+        /* 維持緊湊 5px 行距 */
         .item-row, .selection-row {
             display: flex;
             justify-content: space-between;
@@ -249,7 +247,7 @@
 
     <div id="calculator-content"></div>
 
-    <div class="category-title">་۪ ✿◞ 宅配服務 (請選擇一項)</div>
+    <div class="category-title">་۪ ✿◞ 配送服務 (請選擇一項)</div>
     <label class="selection-row">
         <input type="radio" name="shipping" value="0" data-name="捷運迴龍站自取" checked onchange="calculate()">
         <div class="item-info"><span class="item-name">捷運迴龍站自取</span><span class="item-price">$0</span></div>
@@ -390,17 +388,14 @@
 
     function copyOrder() {
         let text = "✿ balloon.oioioi 訂單試算\n━━━━━━━━━━━\n";
-        
         let bindElem = document.querySelector('input[name="binding"]:checked');
         if (bindElem.value > 0) {
             text += `🎀 綁結方式：${bindElem.getAttribute('data-name')} ($${bindElem.value})\n`;
         }
-
         let grandHasItems = false;
         data.forEach(group => {
             let hasItemsInGroup = false;
             let groupHeader = `\n ${group.category} \n`;
-
             document.querySelectorAll('.qty-input').forEach(input => {
                 if (parseInt(input.value) > 0 && input.dataset.category === group.category) {
                     text += (hasItemsInGroup ? "" : groupHeader);
@@ -410,13 +405,10 @@
                 }
             });
         });
-
         if (!grandHasItems && bindElem.value == 0) { alert("請先選擇品項喔！"); return; }
-        
         let shipElem = document.querySelector('input[name="shipping"]:checked');
         text += `\n🚚 配送：${shipElem.getAttribute('data-name')} (+$${shipElem.value})\n`;
         text += `━━━━━━━━━━━\n💰 總金額：NT$ ${document.getElementById('grand-total').innerText}`;
-        
         navigator.clipboard.writeText(text).then(() => {
             alert("訂單內容已依照分類複製成功！\n請直接貼上私訊IG給我們。");
         });
